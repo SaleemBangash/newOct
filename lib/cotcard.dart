@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:adobe_xd/pinned.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class cotcard extends StatelessWidget {
+  cotcard({
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Pinned.fromPins(
+          Pin(start: 0.0, end: 0.0),
+          Pin(start: 0.0, end: 0.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+              color: const Color(0xfff5b233),
+            ),
+          ),
+        ),
+        Pinned.fromPins(
+          Pin(start: 6.1, end: 6.1),
+          Pin(size: 29.0, end: 6.1),
+          child: SvgPicture.string(
+            _svg_t28i,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
+          ),
+        ),
+        Pinned.fromPins(
+          Pin(size: 22.4, middle: 0.5024),
+          Pin(size: 24.1, start: 6.1),
+          child: SvgPicture.string(
+            _svg_yofnl7,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+const String _svg_t28i =
+    '<svg viewBox="6.1 12.3 35.1 29.0" ><path transform="translate(-1989.64, -1876.25)" d="M 2026.78955078125 1888.671875 L 2024.592163085938 1890.869384765625 C 2026.607666015625 1893.35693359375 2027.814697265625 1896.521484375 2027.814697265625 1899.960693359375 C 2027.814697265625 1907.937866210938 2021.326904296875 1914.429443359375 2013.349853515625 1914.429443359375 C 2005.37255859375 1914.429443359375 1998.880981445312 1907.937866210938 1998.880981445312 1899.960693359375 C 1998.880981445312 1896.46337890625 2000.130615234375 1893.25244140625 2002.2001953125 1890.749389648438 L 2000.0068359375 1888.552001953125 C 1997.3759765625 1891.623657226562 1995.786010742188 1895.6123046875 1995.786010742188 1899.960693359375 C 1995.786010742188 1909.64404296875 2003.66650390625 1917.5244140625 2013.349853515625 1917.5244140625 C 2023.033081054688 1917.5244140625 2030.90966796875 1909.64404296875 2030.90966796875 1899.960693359375 C 2030.90966796875 1895.66650390625 2029.3583984375 1891.724243164062 2026.78955078125 1888.671875 Z" fill="#182744" stroke="none" stroke-width="1" stroke-miterlimit="10" stroke-linecap="butt" /></svg>';
+const String _svg_yofnl7 =
+    '<svg viewBox="12.6 6.1 22.4 24.1" ><path transform="translate(-1999.84, -1866.5)" d="M 2034.79248046875 1876.7373046875 L 2032.594970703125 1878.934692382812 C 2030.494384765625 1877.244140625 2027.913940429688 1876.1298828125 2025.09375 1875.83203125 L 2025.09375 1896.726806640625 L 2021.998779296875 1896.726806640625 L 2021.998779296875 1875.83203125 C 2019.228759765625 1876.1259765625 2016.69091796875 1877.205444335938 2014.613403320312 1878.838012695312 L 2012.416015625 1876.640625 C 2015.449096679688 1874.149169921875 2019.325439453125 1872.651977539062 2023.546142578125 1872.651977539062 C 2027.821044921875 1872.651977539062 2031.743896484375 1874.187866210938 2034.79248046875 1876.7373046875 Z" fill="#182744" stroke="none" stroke-width="1" stroke-miterlimit="10" stroke-linecap="butt" /></svg>';
