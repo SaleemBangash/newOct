@@ -9,6 +9,10 @@ import 'package:newoct/Sidebarr.dart';
 import 'package:newoct/coffee.dart';
 import 'package:newoct/coldDrinks.dart';
 import 'package:newoct/snacks.dart';
+import 'package:newoct/snacks/cheetos.dart';
+import 'package:newoct/snacks/doritos.dart';
+import 'package:newoct/snacks/kurkure.dart';
+import 'package:newoct/snacks/lays.dart';
 import './Location.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'dart:ui' as ui;
@@ -19,6 +23,14 @@ import './Wishlist.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Cart1.dart';
+import 'Drinks/cocacola.dart';
+import 'Drinks/dew.dart';
+import 'Drinks/redbull.dart';
+import 'Drinks/sprite.dart';
+import 'coffee/americano.dart';
+import 'coffee/dopio.dart';
+import 'coffee/flat.dart';
+import 'coffee/lungo.dart';
 
 class Home extends StatelessWidget {
   Home({
@@ -28,310 +40,182 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
-    return Scaffold(
-      backgroundColor: const Color(0xfffdfdfd),
-      body: Stack(
-        children: <Widget>[
-          Pinned.fromPins(
-            Pin(size: 44.0, end: 9.0),
-            Pin(size: 55.0, middle: 0.3758),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.easeInOut,
-                  duration: 0.6,
-                  pageBuilder: () => Location(),
-                ),
-              ],
-              child: Stack(
-                children: <Widget>[
-                  Pinned.fromPins(
-                    Pin(start: 0.0, end: 0.0),
-                    Pin(start: 0.0, end: 0.0),
-                    child: Container(
-                      width: queryData.size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14.0),
-                        color: const Color(0xffbaa378),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0x59000000),
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 21.0, middle: 0.5435),
-                    Pin(start: 13.0, end: 12.0),
-                    child:
-                        // Adobe XD layer: 'Icon material-add-l…' (shape)
-                        SvgPicture.string(
-                      _svg_ya8dv,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(start: 12.0, end: 4.0),
-            Pin(size: 161.0, start: 103.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22.0),
-                image: DecorationImage(
-                  image: const AssetImage("assets/images/Image 2.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(start: 43.0, end: 24.0),
-            Pin(size: 10.0, middle: 0.3195),
-            child: Stack(
-              children: <Widget>[
-                Pinned.fromPins(
-                  Pin(size: 87.0, start: 0.0),
-                  Pin(start: 0.0, end: 0.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.0),
-                      color: const Color(0xff474747),
-                    ),
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 87.0, middle: 0.3333),
-                  Pin(start: 0.0, end: 0.0),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0),
-                          color: const Color(0x12ffffff),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 87.0, middle: 0.6667),
-                  Pin(start: 0.0, end: 0.0),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0),
-                          color: const Color(0x12ffffff),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 87.0, end: 0.0),
-                  Pin(start: 0.0, end: 0.0),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0),
-                          color: const Color(0x12ffffff),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 105.0, start: 19.0),
-            Pin(size: 28.0, middle: 0.4566),
-            child: Text(
-              'Ice Cream',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 20,
-                color: const Color(0xff2a2a2a),
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Pinned.fromPins(
-              Pin(size: 66.0, middle: 0.404), Pin(size: 28.0, middle: 0.4566),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: const Color(0xfffdfdfd),
+        body: Stack(
+          children: <Widget>[
+            Pinned.fromPins(
+              Pin(size: 44.0, end: 9.0),
+              Pin(size: 55.0, middle: 0.3758),
               child: PageLink(
                 links: [
                   PageLinkInfo(
                     transition: LinkTransition.Fade,
                     ease: Curves.easeInOut,
                     duration: 0.6,
-                    pageBuilder: () => Coffee(),
+                    pageBuilder: () => Location(),
                   ),
                 ],
-                child: Text(
-                  'Coffee',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 20,
-                    color: const Color(0xff9f9f9f),
-                  ),
-                  textAlign: TextAlign.left,
+                child: Stack(
+                  children: <Widget>[
+                    Pinned.fromPins(
+                      Pin(start: 0.0, end: 0.0),
+                      Pin(start: 0.0, end: 0.0),
+                      child: Container(
+                        width: queryData.size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14.0),
+                          color: const Color(0xffbaa378),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0x59000000),
+                              offset: Offset(0, 3),
+                              blurRadius: 6,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Pinned.fromPins(
+                      Pin(size: 21.0, middle: 0.5435),
+                      Pin(start: 13.0, end: 12.0),
+                      child:
+                          // Adobe XD layer: 'Icon material-add-l…' (shape)
+                          SvgPicture.string(
+                        _svg_ya8dv,
+                        allowDrawingOutsideViewBox: true,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ],
                 ),
-              )),
-          Pinned.fromPins(
-              Pin(size: 71.0, middle: 0.6304), Pin(size: 28.0, middle: 0.4566),
-              child: PageLink(
-                links: [
-                  PageLinkInfo(
-                    ease: Curves.easeInOut,
-                    duration: 0.6,
-                    pageBuilder: () => Snacks(),
-                  ),
-                ],
-                child: Text(
-                  'Snacks',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 20,
-                    color: const Color(0xff9f9f9f),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              )),
-          Pinned.fromPins(
-              Pin(size: 102.0, end: 10.0), Pin(size: 28.0, middle: 0.4566),
-              child: PageLink(
-                links: [
-                  PageLinkInfo(
-                    ease: Curves.easeInOut,
-                    duration: 0.6,
-                    pageBuilder: () => Drinks(),
-                  ),
-                ],
-                child: Text(
-                  'Cold Drink',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 20,
-                    color: const Color(0xff9f9f9f),
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              )),
-          Pinned.fromPins(
-            Pin(size: 105.0, start: 19.5),
-            Pin(size: 1.0, middle: 0.4774),
-            child: SvgPicture.string(
-              _svg_cc2wz2,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 31.5, start: 17.3),
-            Pin(size: 27.6, start: 50.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.easeInOut,
-                  duration: 0.6,
-                  pageBuilder: () => Sidebarr(),
-                ),
-              ],
-              // Adobe XD layer: 'Icon awesome-bars' (shape)
-              child: SvgPicture.string(
-                _svg_ilbpg,
-                allowDrawingOutsideViewBox: true,
-                fit: BoxFit.fill,
               ),
             ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 314.4, start: 20.5),
-            Pin(size: 32.6, middle: 0.3962),
-            child: Stack(
-              children: <Widget>[
-                TextFormField(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      hintText: "Search", suffixIcon: Icon(Icons.search)),
-                )
-                // Pinned.fromPins(
-                //   Pin(start: 0.0, end: 0.0),
-                //   Pin(size: 1.0, end: -1.0),
-                //   child: SvgPicture.string(
-                //     _svg_som8e3,
-                //     allowDrawingOutsideViewBox: true,
-                //     fit: BoxFit.fill,
-                //   ),
-                // ),
-                // Pinned.fromPins(
-                //   Pin(size: 77.0, start: 0.0),
-                //   Pin(start: 0.0, end: 1.6),
-                //   child: Text(
-                //     'Search',
-                //     style: TextStyle(
-                //       fontFamily: 'Poppins',
-                //       fontSize: 22,
-                //       color: const Color(0xa8474747),
-                //     ),
-                //     textAlign: TextAlign.left,
-                //   ),
-                // ),
-                // Pinned.fromPins(
-                //   Pin(size: 25.5, end: 2.9),
-                //   Pin(size: 25.5, start: 1.0),
-                //   child:
-                //       // Adobe XD layer: 'Icon awesome-search' (shape)
-                //       SvgPicture.string(
-                //     _svg_v58nwj,
-                //     allowDrawingOutsideViewBox: true,
-                //     fit: BoxFit.fill,
-                //   ),
-                // ),
-              ],
+            Pinned.fromPins(
+              Pin(start: 12.0, end: 4.0),
+              Pin(size: 161.0, start: 103.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22.0),
+                  image: DecorationImage(
+                    image: const AssetImage("assets/images/Image 2.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 107.0, middle: 0.5208),
-            Pin(size: 43.0, start: 13.0),
-            child: Text(
-              '25 OCT',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 30,
-                color: const Color(0xff2a2a2a),
-                fontWeight: FontWeight.w700,
-                shadows: [
-                  Shadow(
-                    color: const Color(0x70000000),
-                    offset: Offset(0, 3),
-                    blurRadius: 6,
-                  )
+            Pinned.fromPins(
+              Pin(start: 43.0, end: 24.0),
+              Pin(size: 10.0, middle: 0.3195),
+              child: Stack(
+                children: <Widget>[
+                  Pinned.fromPins(
+                    Pin(size: 87.0, start: 0.0),
+                    Pin(start: 0.0, end: 0.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: const Color(0xff474747),
+                      ),
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 87.0, middle: 0.3333),
+                    Pin(start: 0.0, end: 0.0),
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: const Color(0x12ffffff),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 87.0, middle: 0.6667),
+                    Pin(start: 0.0, end: 0.0),
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: const Color(0x12ffffff),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 87.0, end: 0.0),
+                    Pin(start: 0.0, end: 0.0),
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: 17.0, sigmaY: 17.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: const Color(0x12ffffff),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              textAlign: TextAlign.left,
             ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 369.0, middle: 0.5784),
-            Pin(size: 357.0, end: 4.8),
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: SizedBox(
+            Padding(
+              padding: const EdgeInsets.only(top: 340, left: 10, right: 10),
+              child: Container(
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(16)),
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      //indicatorWeight: 15,
+                      // indicatorPadding: const EdgeInsets.all(10),
+                      //indicatorSize: TabBarIndicatorSize.label,
+                      //indicatorColor: Colors.blue,
+                      indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.blue),
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.black,
+                      tabs: [
+                        Tab(
+                          text: "Ice Cream",
+                        ),
+                        Tab(
+                          text: "Coffee",
+                        ),
+                        Tab(
+                          text: "Snacks",
+                        ),
+                        Tab(
+                          text: "Drinks",
+                        )
+                      ]),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 390, left: 10),
+              child: TabBarView(children: [
+                Scrollbar(
+                    child: SingleChildScrollView(
+                        child: SizedBox(
                   width: 369.0,
                   height: 968.0,
                   child: Stack(
@@ -1266,129 +1150,1792 @@ class Home extends StatelessWidget {
                       ),
                     ],
                   ),
+                ))),
+                GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+                  children: [
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Americano".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Americano(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/americano.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Text(
+                          "100",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //padding: const Edge
+                      //Insets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Doppio".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              width: 2,
+                            ),
+                          ),
+                          child: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 20, bottom: 20),
+                              child: PageLink(
+                                links: [
+                                  PageLinkInfo(
+                                    transition: LinkTransition.Fade,
+                                    ease: Curves.easeInOut,
+                                    duration: 0.6,
+                                    pageBuilder: () => Dopio(),
+                                  ),
+                                ],
+                                child: Image.asset(
+                                  "assets/images/doppio.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
+                        ),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      semanticContainer: true,
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //padding: const EdgeInsets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Flat Coffee".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Flat(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/flat.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ))),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      // padding: const EdgeInsets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Lungo Coffee".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Lungo(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/lungo.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ))),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      //color: Colors.teal[400],
+                    ),
+                  ],
+                ),
+                GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+                  children: [
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "KurKure".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Kurkure(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/kurkure.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Text(
+                          "100",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Lays".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Lays(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/lays.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Center(
+                          child: Text(
+                            "100",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "doritos".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Doritos(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/doritos.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Center(
+                          child: Text(
+                            "100",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Cheetos".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Cheetos(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/cheetos.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Center(
+                          child: Text(
+                            "100",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                      ),
+                    ),
+                  ],
+                ),
+                GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+                  children: [
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Sprite".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Sprite(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/sprite.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                            child: Text(
+                          "100",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //padding: const Edge
+                      //Insets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Dew".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => Dew(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/dew.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      semanticContainer: true,
+                      color: Colors.brown[300],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      //padding: const EdgeInsets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Coco Cola".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => CocaCola(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/cocaCola.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      color: Colors.brown[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      // padding: const EdgeInsets.all(8),
+                      child: GridTile(
+                        header: Center(
+                          child: Text(
+                            "Red Bull".toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        // ignore: avoid_unnecessary_containers
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: PageLink(
+                                  links: [
+                                    PageLinkInfo(
+                                      transition: LinkTransition.Fade,
+                                      ease: Curves.easeInOut,
+                                      duration: 0.6,
+                                      pageBuilder: () => RedBull(),
+                                    ),
+                                  ],
+                                  child: Image.asset(
+                                    "assets/images/red.jpg",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ))),
+                        footer: Center(
+                          child: Text("100",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      //color: Colors.teal[400],
+                    ),
+                  ],
+                ),
+              ]),
+            ),
+            // Pinned.fromPins(
+            //   Pin(size: 105.0, start: 19.0),
+            //   Pin(size: 28.0, middle: 0.4566),
+            //   child: Text(
+            //     'Ice Cream',
+            //     style: TextStyle(
+            //       fontFamily: 'Poppins',
+            //       fontSize: 20,
+            //       color: const Color(0xff2a2a2a),
+            //       fontWeight: FontWeight.w700,
+            //     ),
+            //     textAlign: TextAlign.left,
+            //   ),
+            // ),
+            //  Pinned.fromPins(
+            //     Pin(size: 66.0, middle: 0.404), Pin(size: 28.0, middle: 0.4566),
+            //     child: PageLink(
+            //       links: [
+            //         PageLinkInfo(
+            //           transition: LinkTransition.Fade,
+            //           ease: Curves.easeInOut,
+            //           duration: 0.6,
+            //           pageBuilder: () => Coffee(),
+            //         ),
+            //       ],
+            //       child: Text(
+            //         'Coffee',
+            //         style: TextStyle(
+            //           fontFamily: 'Poppins',
+            //           fontSize: 20,
+            //           color: const Color(0xff9f9f9f),
+            //         ),
+            //         textAlign: TextAlign.left,
+            //       ),
+            //     )),
+            // Pinned.fromPins(
+            //     Pin(size: 71.0, middle: 0.6304), Pin(size: 28.0, middle: 0.4566),
+            //     child: PageLink(
+            //       links: [
+            //         PageLinkInfo(
+            //           ease: Curves.easeInOut,
+            //           duration: 0.6,
+            //           pageBuilder: () => Snacks(),
+            //         ),
+            //       ],
+            //       child: Text(
+            //         'Snacks',
+            //         style: TextStyle(
+            //           fontFamily: 'Poppins',
+            //           fontSize: 20,
+            //           color: const Color(0xff9f9f9f),
+            //         ),
+            //         textAlign: TextAlign.left,
+            //       ),
+            //     )),
+
+            // Pinned.fromPins(
+            //     Pin(size: 102.0, end: 10.0), Pin(size: 28.0, middle: 0.4566),
+            //     child: PageLink(
+            //       links: [
+            //         PageLinkInfo(
+            //           ease: Curves.easeInOut,
+            //           duration: 0.6,
+            //           pageBuilder: () => Drinks(),
+            //         ),
+            //       ],
+            //       child: Text(
+            //         'Cold Drink',
+            //         style: TextStyle(
+            //           fontFamily: 'Poppins',
+            //           fontSize: 20,
+            //           color: const Color(0xff9f9f9f),
+            //         ),
+            //         textAlign: TextAlign.left,
+            //       ),
+            //     )),
+            // Pinned.fromPins(
+            //   Pin(size: 105.0, start: 19.5),
+            //   Pin(size: 1.0, middle: 0.4774),
+            //   child: SvgPicture.string(
+            //     _svg_cc2wz2,
+            //     allowDrawingOutsideViewBox: true,
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+            Pinned.fromPins(
+              Pin(size: 31.5, start: 17.3),
+              Pin(size: 27.6, start: 50.0),
+              child: PageLink(
+                links: [
+                  PageLinkInfo(
+                    transition: LinkTransition.Fade,
+                    ease: Curves.easeInOut,
+                    duration: 0.6,
+                    pageBuilder: () => Sidebarr(),
+                  ),
+                ],
+                // Adobe XD layer: 'Icon awesome-bars' (shape)
+                child: SvgPicture.string(
+                  _svg_ilbpg,
+                  allowDrawingOutsideViewBox: true,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-          ),
+            Pinned.fromPins(
+              Pin(size: 314.4, start: 20.5),
+              Pin(size: 32.6, middle: 0.3962),
+              child: Stack(
+                children: <Widget>[
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        hintText: "Search", suffixIcon: Icon(Icons.search)),
+                  )
+                  // Pinned.fromPins(
+                  //   Pin(start: 0.0, end: 0.0),
+                  //   Pin(size: 1.0, end: -1.0),
+                  //   child: SvgPicture.string(
+                  //     _svg_som8e3,
+                  //     allowDrawingOutsideViewBox: true,
+                  //     fit: BoxFit.fill,
+                  //   ),
+                  // ),
+                  // Pinned.fromPins(
+                  //   Pin(size: 77.0, start: 0.0),
+                  //   Pin(start: 0.0, end: 1.6),
+                  //   child: Text(
+                  //     'Search',
+                  //     style: TextStyle(
+                  //       fontFamily: 'Poppins',
+                  //       fontSize: 22,
+                  //       color: const Color(0xa8474747),
+                  //     ),
+                  //     textAlign: TextAlign.left,
+                  //   ),
+                  // ),
+                  // Pinned.fromPins(
+                  //   Pin(size: 25.5, end: 2.9),
+                  //   Pin(size: 25.5, start: 1.0),
+                  //   child:
+                  //       // Adobe XD layer: 'Icon awesome-search' (shape)
+                  //       SvgPicture.string(
+                  //     _svg_v58nwj,
+                  //     allowDrawingOutsideViewBox: true,
+                  //     fit: BoxFit.fill,
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+            Pinned.fromPins(
+              Pin(size: 107.0, middle: 0.5208),
+              Pin(size: 43.0, start: 13.0),
+              child: Text(
+                '25 OCT',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 30,
+                  color: const Color(0xff2a2a2a),
+                  fontWeight: FontWeight.w700,
+                  shadows: [
+                    Shadow(
+                      color: const Color(0x70000000),
+                      offset: Offset(0, 3),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            // Pinned.fromPins(
+            //   Pin(size: 369.0, middle: 0.5784),
+            //   Pin(size: 357.0, end: 4.8),
+            //   child: Scrollbar(
+            //     child: SingleChildScrollView(
+            //       child: SizedBox(
+            //         width: 369.0,
+            //         height: 968.0,
+            //         child: Stack(
+            //           children: <Widget>[
+            //             Pinned.fromPins(
+            //               Pin(start: 0.0, end: 0.0),
+            //               Pin(start: 20.5, end: 10.5),
+            //               child: Stack(
+            //                 children: <Widget>[
+            //                   Pinned.fromPins(
+            //                     Pin(size: 176.0, start: 1.0),
+            //                     Pin(size: 224.0, start: 0.0),
+            //                     child: PageLink(
+            //                       links: [
+            //                         PageLinkInfo(
+            //                           transition: LinkTransition.Fade,
+            //                           ease: Curves.easeOut,
+            //                           duration: 0.3,
+            //                           pageBuilder: () => Detail(),
+            //                         ),
+            //                       ],
+            //                       child: Stack(
+            //                         children: <Widget>[
+            //                           Pinned.fromPins(
+            //                             Pin(start: 0.0, end: 0.0),
+            //                             Pin(start: 0.0, end: 0.0),
+            //                             child: Stack(
+            //                               children: <Widget>[
+            //                                 Pinned.fromPins(
+            //                                   Pin(start: 0.0, end: 0.0),
+            //                                   Pin(start: 0.0, end: 0.0),
+            //                                   child: Container(
+            //                                     decoration: BoxDecoration(
+            //                                       borderRadius:
+            //                                           BorderRadius.circular(
+            //                                               7.0),
+            //                                       color:
+            //                                           const Color(0xffeeeeee),
+            //                                       boxShadow: [
+            //                                         BoxShadow(
+            //                                           color: const Color(
+            //                                               0x78000000),
+            //                                           offset: Offset(3, -1),
+            //                                           blurRadius: 13,
+            //                                         ),
+            //                                       ],
+            //                                     ),
+            //                                   ),
+            //                                 ),
+            //                                 Pinned.fromPins(
+            //                                   Pin(start: 0.0, end: 0.0),
+            //                                   Pin(start: 0.0, end: 65.0),
+            //                                   child:
+            //                                       // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                       Container(
+            //                                     decoration: BoxDecoration(
+            //                                       borderRadius:
+            //                                           BorderRadius.only(
+            //                                         topLeft:
+            //                                             Radius.circular(9.0),
+            //                                         topRight:
+            //                                             Radius.circular(9.0),
+            //                                       ),
+            //                                       image: DecorationImage(
+            //                                         image: const AssetImage(
+            //                                             'assets/images/sheri-silver-26.png'),
+            //                                         fit: BoxFit.fill,
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                 ),
+            //                                 Pinned.fromPins(
+            //                                   Pin(size: 74.0, middle: 0.5),
+            //                                   Pin(size: 25.0, end: 9.0),
+            //                                   child: Text(
+            //                                     '20.00 SR',
+            //                                     style: TextStyle(
+            //                                       fontFamily: 'Poppins',
+            //                                       fontSize: 18,
+            //                                       color:
+            //                                           const Color(0xff2a2a2a),
+            //                                     ),
+            //                                     textAlign: TextAlign.left,
+            //                                   ),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                           ),
+            //                           Pinned.fromPins(
+            //                             Pin(size: 49.0, end: 5.0),
+            //                             Pin(size: 49.0, middle: 0.7486),
+            //                             child: Container(
+            //                               decoration: BoxDecoration(
+            //                                 borderRadius: BorderRadius.all(
+            //                                     Radius.elliptical(
+            //                                         9999.0, 9999.0)),
+            //                                 color: const Color(0xffeeeeee),
+            //                               ),
+            //                             ),
+            //                           ),
+            //                           Pinned.fromPins(
+            //                             Pin(size: 25.6, end: 26.4),
+            //                             Pin(size: 22.4, middle: 0.6698),
+            //                             child:
+            //                                 // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                 Iconawesomeheart(),
+            //                           ),
+            //                           Pinned.fromPins(
+            //                             Pin(start: 19.0, end: 18.0),
+            //                             Pin(size: 25.0, end: 31.0),
+            //                             child: Text(
+            //                               'Vanilla Flavour',
+            //                               style: TextStyle(
+            //                                 fontFamily: 'Poppins',
+            //                                 fontSize: 18,
+            //                                 color: const Color(0xff2a2a2a),
+            //                                 fontWeight: FontWeight.w700,
+            //                               ),
+            //                               textAlign: TextAlign.left,
+            //                             ),
+            //                           ),
+            //                         ],
+            //                       ),
+            //                     ),
+            //                   ),
+            //                   Pinned.fromPins(Pin(size: 176.0, end: 0.0),
+            //                       Pin(size: 224.0, middle: 0.3333),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Detail(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     // child: PageLink(
+            //                                     //   links: [
+            //                                     //     PageLinkInfo(
+            //                                     //       transition:
+            //                                     //           LinkTransition.Fade,
+            //                                     //       ease: Curves.easeOut,
+            //                                     //       duration: 0.3,
+            //                                     //       pageBuilder: () =>
+            //                                     //           Chocolate(),
+            //                                     //     ),
+            //                                     //   ],
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(9.0),
+            //                                           topRight:
+            //                                               Radius.circular(9.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-26.png'),
+            //                                           fit: BoxFit.fill,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(start: 19.0, end: 18.0),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Vanilla Flavour',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, end: 0.0),
+            //                       Pin(size: 224.0, start: 0.0),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Chocolate(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(7.0),
+            //                                           topRight:
+            //                                               Radius.circular(7.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-2.png'),
+            //                                           fit: BoxFit.cover,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(start: 16.0, end: 15.0),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Chocolate cone',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, start: 1.0),
+            //                       Pin(size: 224.0, middle: 0.3333),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Strawberry(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(7.0),
+            //                                           topRight:
+            //                                               Radius.circular(7.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-3.png'),
+            //                                           fit: BoxFit.cover,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 104.0, middle: 0.5),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Strawberry',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, start: 0.0),
+            //                       Pin(size: 224.0, middle: 0.6667),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Detail(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(9.0),
+            //                                           topRight:
+            //                                               Radius.circular(9.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-5.png'),
+            //                                           fit: BoxFit.fill,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(start: 19.0, end: 18.0),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Vanilla Flavour',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, end: 1.0),
+            //                       Pin(size: 224.0, end: 0.0),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Detail(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(9.0),
+            //                                           topRight:
+            //                                               Radius.circular(9.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-5.png'),
+            //                                           fit: BoxFit.fill,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(start: 19.0, end: 18.0),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Vanilla Flavour',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, end: 1.0),
+            //                       Pin(size: 224.0, middle: 0.6667),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Chocolate(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(7.0),
+            //                                           topRight:
+            //                                               Radius.circular(7.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-2.png'),
+            //                                           fit: BoxFit.cover,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(start: 16.0, end: 15.0),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Chocolate cone',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                   Pinned.fromPins(Pin(size: 176.0, start: 0.0),
+            //                       Pin(size: 224.0, end: 0.0),
+            //                       child: PageLink(
+            //                         links: [
+            //                           PageLinkInfo(
+            //                             transition: LinkTransition.Fade,
+            //                             ease: Curves.easeOut,
+            //                             duration: 0.3,
+            //                             pageBuilder: () => Strawberry(),
+            //                           ),
+            //                         ],
+            //                         child: Stack(
+            //                           children: <Widget>[
+            //                             Pinned.fromPins(
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               Pin(start: 0.0, end: 0.0),
+            //                               child: Stack(
+            //                                 children: <Widget>[
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     child: Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.circular(
+            //                                                 7.0),
+            //                                         color:
+            //                                             const Color(0xffeeeeee),
+            //                                         boxShadow: [
+            //                                           BoxShadow(
+            //                                             color: const Color(
+            //                                                 0x78000000),
+            //                                             offset: Offset(3, -1),
+            //                                             blurRadius: 13,
+            //                                           ),
+            //                                         ],
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(start: 0.0, end: 0.0),
+            //                                     Pin(start: 0.0, end: 65.0),
+            //                                     child:
+            //                                         // Adobe XD layer: 'sheri-silver-5A0O12…' (shape)
+            //                                         Container(
+            //                                       decoration: BoxDecoration(
+            //                                         borderRadius:
+            //                                             BorderRadius.only(
+            //                                           topLeft:
+            //                                               Radius.circular(7.0),
+            //                                           topRight:
+            //                                               Radius.circular(7.0),
+            //                                         ),
+            //                                         image: DecorationImage(
+            //                                           image: const AssetImage(
+            //                                               'assets/images/sheri-silver-7.png'),
+            //                                           fit: BoxFit.cover,
+            //                                         ),
+            //                                       ),
+            //                                     ),
+            //                                   ),
+            //                                   Pinned.fromPins(
+            //                                     Pin(size: 74.0, middle: 0.5),
+            //                                     Pin(size: 25.0, end: 9.0),
+            //                                     child: Text(
+            //                                       '20.00 SR',
+            //                                       style: TextStyle(
+            //                                         fontFamily: 'Poppins',
+            //                                         fontSize: 18,
+            //                                         color:
+            //                                             const Color(0xff2a2a2a),
+            //                                       ),
+            //                                       textAlign: TextAlign.left,
+            //                                     ),
+            //                                   ),
+            //                                 ],
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 49.0, end: 5.0),
+            //                               Pin(size: 49.0, middle: 0.7486),
+            //                               child: Container(
+            //                                 decoration: BoxDecoration(
+            //                                   borderRadius: BorderRadius.all(
+            //                                       Radius.elliptical(
+            //                                           9999.0, 9999.0)),
+            //                                   color: const Color(0xffeeeeee),
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 25.6, end: 26.4),
+            //                               Pin(size: 22.4, middle: 0.6698),
+            //                               child:
+            //                                   // Adobe XD layer: 'Icon awesome-heart' (component)
+            //                                   Iconawesomeheart(),
+            //                             ),
+            //                             Pinned.fromPins(
+            //                               Pin(size: 104.0, middle: 0.5),
+            //                               Pin(size: 25.0, end: 31.0),
+            //                               child: Text(
+            //                                 'Strawberry',
+            //                                 style: TextStyle(
+            //                                   fontFamily: 'Poppins',
+            //                                   fontSize: 18,
+            //                                   color: const Color(0xff2a2a2a),
+            //                                   fontWeight: FontWeight.w700,
+            //                                 ),
+            //                                 textAlign: TextAlign.left,
+            //                               ),
+            //                             ),
+            //                           ],
+            //                         ),
+            //                       )),
+            //                 ],
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
-          //Botttom Buttons Bar
-          Pinned.fromPins(
-            Pin(start: 0.0, end: -8.0),
-            Pin(size: 54.0, end: 0.0),
-            child: Stack(
-              children: <Widget>[
-                Pinned.fromPins(
-                  Pin(start: 0.0, end: 0.0),
-                  Pin(start: 0.0, end: 0.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0),
-                      ),
-                      gradient: LinearGradient(
-                        begin: Alignment(0.0, -1.0),
-                        end: Alignment(0.0, 1.0),
-                        colors: [
-                          const Color(0xffbaa378),
-                          const Color(0xff948261)
-                        ],
-                        stops: [0.0, 1.0],
+            //Botttom Buttons Bar
+            Pinned.fromPins(
+              Pin(start: 0.0, end: -8.0),
+              Pin(size: 54.0, end: 0.0),
+              child: Stack(
+                children: <Widget>[
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(start: 0.0, end: 0.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0),
+                        ),
+                        gradient: LinearGradient(
+                          begin: Alignment(0.0, -1.0),
+                          end: Alignment(0.0, 1.0),
+                          colors: [
+                            const Color(0xffbaa378),
+                            const Color(0xff948261)
+                          ],
+                          stops: [0.0, 1.0],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 60.0, start: 25.0),
-                  Pin(size: 43.5, end: 1.5),
-                  child: Stack(
-                    children: <Widget>[
-                      Pinned.fromPins(
-                        Pin(size: 33.2, middle: 0.3737),
-                        Pin(size: 36.9, start: 0.0),
-                        child: Stack(
-                          children: <Widget>[
-                            Pinned.fromPins(
-                              Pin(start: 0.0, end: 0.0),
-                              Pin(start: 0.0, end: 0.0),
-                              child: SvgPicture.string(
-                                _svg_ob0a0d,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromPins(
-                              Pin(size: 11.1, middle: 0.5),
-                              Pin(size: 18.5, end: 0.0),
-                              child: SvgPicture.string(
-                                _svg_hcv6ir,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Pinned.fromPins(
-                        Pin(start: 0.0, end: 0.0),
-                        Pin(size: 28.0, end: 0.0),
-                        child: Text(
-                          '',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 20,
-                            color: const Color(0xff2a2a2a),
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 36.5, middle: 0.4649),
-                  Pin(size: 34.8, middle: 0.5917),
-                  child: PageLink(
-                    links: [
-                      PageLinkInfo(
-                        transition: LinkTransition.Fade,
-                        ease: Curves.easeInOut,
-                        duration: 1.0,
-                        pageBuilder: () => Cart(),
-                      ),
-                    ],
+                  Pinned.fromPins(
+                    Pin(size: 60.0, start: 25.0),
+                    Pin(size: 43.5, end: 1.5),
                     child: Stack(
                       children: <Widget>[
                         Pinned.fromPins(
-                          Pin(start: 0.0, end: 0.0),
-                          Pin(start: 0.0, end: 0.0),
-                          child:
-                              // Adobe XD layer: 'Icon feather-shoppi…' (group)
-                              Stack(
+                          Pin(size: 33.2, middle: 0.3737),
+                          Pin(size: 36.9, start: 0.0),
+                          child: Stack(
                             children: <Widget>[
                               Pinned.fromPins(
-                                Pin(size: 3.3, middle: 0.35),
-                                Pin(size: 3.3, end: 0.0),
-                                child: SvgPicture.string(
-                                  _svg_u51o,
-                                  allowDrawingOutsideViewBox: true,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Pinned.fromPins(
-                                Pin(size: 3.3, end: 3.3),
-                                Pin(size: 3.3, end: 0.0),
-                                child: SvgPicture.string(
-                                  _svg_p2w3cf,
-                                  allowDrawingOutsideViewBox: true,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Pinned.fromPins(
                                 Pin(start: 0.0, end: 0.0),
-                                Pin(start: 0.0, end: 10.0),
+                                Pin(start: 0.0, end: 0.0),
                                 child: SvgPicture.string(
-                                  _svg_wn3ln7,
+                                  _svg_ob0a0d,
+                                  allowDrawingOutsideViewBox: true,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Pinned.fromPins(
+                                Pin(size: 11.1, middle: 0.5),
+                                Pin(size: 18.5, end: 0.0),
+                                child: SvgPicture.string(
+                                  _svg_hcv6ir,
                                   allowDrawingOutsideViewBox: true,
                                   fit: BoxFit.fill,
                                 ),
@@ -1396,43 +2943,111 @@ class Home extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                Pinned.fromPins(
-                  Pin(size: 32.8, end: 58.7),
-                  Pin(size: 28.7, middle: 0.5742),
-                  child: PageLink(
-                    links: [
-                      PageLinkInfo(
-                        transition: LinkTransition.Fade,
-                        ease: Curves.easeInOut,
-                        duration: 1.0,
-                        pageBuilder: () => Wishlist(),
-                      ),
-                    ],
-                    child: Stack(
-                      children: <Widget>[
                         Pinned.fromPins(
                           Pin(start: 0.0, end: 0.0),
-                          Pin(start: 0.0, end: 0.0),
-                          child:
-                              // Adobe XD layer: 'Icon awesome-heart' (shape)
-                              SvgPicture.string(
-                            _svg_czp7x7,
-                            allowDrawingOutsideViewBox: true,
-                            fit: BoxFit.fill,
+                          Pin(size: 28.0, end: 0.0),
+                          child: Text(
+                            '',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 20,
+                              color: const Color(0xff2a2a2a),
+                            ),
+                            textAlign: TextAlign.left,
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  Pinned.fromPins(
+                    Pin(size: 36.5, middle: 0.4649),
+                    Pin(size: 34.8, middle: 0.5917),
+                    child: PageLink(
+                      links: [
+                        PageLinkInfo(
+                          transition: LinkTransition.Fade,
+                          ease: Curves.easeInOut,
+                          duration: 1.0,
+                          pageBuilder: () => Cart(),
+                        ),
+                      ],
+                      child: Stack(
+                        children: <Widget>[
+                          Pinned.fromPins(
+                            Pin(start: 0.0, end: 0.0),
+                            Pin(start: 0.0, end: 0.0),
+                            child:
+                                // Adobe XD layer: 'Icon feather-shoppi…' (group)
+                                Stack(
+                              children: <Widget>[
+                                Pinned.fromPins(
+                                  Pin(size: 3.3, middle: 0.35),
+                                  Pin(size: 3.3, end: 0.0),
+                                  child: SvgPicture.string(
+                                    _svg_u51o,
+                                    allowDrawingOutsideViewBox: true,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Pinned.fromPins(
+                                  Pin(size: 3.3, end: 3.3),
+                                  Pin(size: 3.3, end: 0.0),
+                                  child: SvgPicture.string(
+                                    _svg_p2w3cf,
+                                    allowDrawingOutsideViewBox: true,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Pinned.fromPins(
+                                  Pin(start: 0.0, end: 0.0),
+                                  Pin(start: 0.0, end: 10.0),
+                                  child: SvgPicture.string(
+                                    _svg_wn3ln7,
+                                    allowDrawingOutsideViewBox: true,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Pinned.fromPins(
+                    Pin(size: 32.8, end: 58.7),
+                    Pin(size: 28.7, middle: 0.5742),
+                    child: PageLink(
+                      links: [
+                        PageLinkInfo(
+                          transition: LinkTransition.Fade,
+                          ease: Curves.easeInOut,
+                          duration: 1.0,
+                          pageBuilder: () => Wishlist(),
+                        ),
+                      ],
+                      child: Stack(
+                        children: <Widget>[
+                          Pinned.fromPins(
+                            Pin(start: 0.0, end: 0.0),
+                            Pin(start: 0.0, end: 0.0),
+                            child:
+                                // Adobe XD layer: 'Icon awesome-heart' (shape)
+                                SvgPicture.string(
+                              _svg_czp7x7,
+                              allowDrawingOutsideViewBox: true,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
