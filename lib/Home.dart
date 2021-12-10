@@ -207,7 +207,7 @@ class Home extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 40,
             ),
 
             Padding(
